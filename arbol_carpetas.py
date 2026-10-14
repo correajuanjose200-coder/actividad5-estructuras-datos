@@ -9,6 +9,9 @@ nuestra propia cola (sin collections.deque, sin heapq).
 """
 
 
+from cola_prioridad import Cola  # la cola construida en la Parte A
+
+
 class Nodo:
     def __init__(self, nombre, es_entrega=False):
         self.nombre = nombre
@@ -18,43 +21,6 @@ class Nodo:
     def agregar(self, hijo):
         self.hijos.append(hijo)
         return hijo
-
-
-# ---------- Cola FIFO propia (lista enlazada) ----------
-# Si en la Parte A ya tienes una cola FIFO, impórtala en vez de esta.
-class _NodoCola:
-    def __init__(self, dato):
-        self.dato = dato
-        self.siguiente = None
-
-
-class Cola:
-    def __init__(self):
-        self._frente = None
-        self._final = None
-        self._tam = 0
-
-    def encolar(self, dato):
-        nuevo = _NodoCola(dato)
-        if self._final is None:
-            self._frente = self._final = nuevo
-        else:
-            self._final.siguiente = nuevo
-            self._final = nuevo
-        self._tam += 1
-
-    def desencolar(self):
-        if self._frente is None:
-            raise IndexError("cola vacía")
-        dato = self._frente.dato
-        self._frente = self._frente.siguiente
-        if self._frente is None:
-            self._final = None
-        self._tam -= 1
-        return dato
-
-    def esta_vacia(self):
-        return self._tam == 0
 
 
 class Pila:
